@@ -3,9 +3,9 @@ const assertEqual = (actual, expected) => {
   console.log(`✅✅✅ Assertion Passed: ${actual} === ${expected}`);
 };
 
-const findKeyByValue = (bestShows, showTitle) => {
-  for (const [genre, show] of Object.entries(bestShows)) {
-    if (showTitle === show) return genre;
+const findKeyByValue = (object, value) => {
+  for (const [key, val] of Object.entries(object)) {
+    if (value === val) return key;
   }
 };
 
