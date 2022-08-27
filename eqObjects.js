@@ -18,13 +18,8 @@ const eqObjectsCore = (object1, object2) => {
   if (Object.keys(object1).length !== Object.keys(object2).length) return false; // avoid having to loop if the objects do not have the same # of keys
 
   for (const [key, value] of Object.entries(object1)) {
-    if (
-      Array.isArray(value)
-        ? eqArrays(value, object2[key])
-        : value === object2[key]
-    )
-      continue;
-    else return false;
+    if (Array.isArray(value) ? eqArrays(value, object2[key]) : value === object2[key]) continue;
+    return false;
   }
   return true;
 };
@@ -44,11 +39,8 @@ const eqObjectsStretch = (object1, object2) => {
   for (const [key, value] of Object.entries(object1)) {
     const type = valType(value);
     if (type === "object") eqObjectsStretch(value, object2[key]);
-    if (
-      type === "array" ? eqArrays(value, object2[key]) : value === object2[key]
-    )
-      continue;
-    else return false;
+    if (type === "array" ? eqArrays(value, object2[key]) : value === object2[key]) continue;
+    return false;
   }
   return true;
 };
@@ -56,6 +48,7 @@ const eqObjectsStretch = (object1, object2) => {
 // TESTS
 
 // --- CORE ---
+console.log('---CORE---');
 
 // Primitive values only
 const ab = { a: "1", b: "2" };
@@ -74,6 +67,7 @@ const cd2 = { c: "1", d: ["2", 3, 4], e: 4 };
 assertEqual(eqObjectsCore(cd, cd2), false);
 
 // --- STRETCH ---
+console.log('---STRETCH---');
 
 // Nested Objects (using recursion)
 const azb = { a: { z: 1 }, b: 2 };
