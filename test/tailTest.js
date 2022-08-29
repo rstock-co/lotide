@@ -1,27 +1,26 @@
-const assertEqual = require('../assertEqual');
+const assert = require('chai').assert;
 const tail = require('../tail');
 
-// Test Case 0: Confirm original array is not mutating
-const words = ["Yo Yo", "Lighthouse", "Labs"];
-tail(words); // no need to capture the return value since we are not checking it
-assertEqual(words.length, 3); // original array should still have 3 elements!
-console.log('--------');
+describe("#tail", () => {
+  it("Confirms that the original array is not being mutated", () => {
+    const words = ["Yo Yo", "Lighthouse", "Labs"];
+    tail(words);
+    assert.strictEqual(words.length, 3);
+  });
+  it("works for an array with more than 2 elements", () => {
+    const result = tail(["Hello", "Lighthouse", "Labs"]);
+    assert.strictEqual(result.length, 2);
+    assert.deepEqual(result,["Lighthouse", "Labs"]);
+  });
+  it("returns an empty array when passed array with just 1 element", () => {
+    const result = tail(["Hello"]);
+    assert.strictEqual(result.length, 0);
+    assert.strictEqual(result[0],undefined);
+  });
+  it("returns an empty array when passed an empty array", () => {
+    const result = tail([]);
+    assert.strictEqual(result.length, 0);
+    assert.strictEqual(result[0],undefined);
+  });  
+});
 
-// Test Case 1: More than 2 elements 
-const test1 = tail(["Hello", "Lighthouse", "Labs"]);
-assertEqual(test1.length, 2); // ensure we get back two elements
-assertEqual(test1[0], "Lighthouse"); // ensure first element is "Lighthouse"
-assertEqual(test1[1], "Labs"); // ensure second element is "Labs"
-console.log('--------');
-
-// Test Case 2: One element
-const test2 = tail(["Hello"]);
-assertEqual(test2.length, 0); // ensure we get back zero elements
-assertEqual(test2[0], undefined); // ensure first element is undefined
-console.log('--------');
-
-// Test Case 3: Empty array
-const test3 = tail([]);
-assertEqual(test3.length, 0); // ensure we get back zero elements
-assertEqual(test3[0], undefined); // ensure first element is undefined
-console.log('--------');
