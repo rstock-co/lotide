@@ -1,27 +1,27 @@
+const assert = require('chai').assert;
 const middle = require('../middle');
-const assertArraysEqual = require('../assertArraysEqual');
 
-// Does not mutate source array
-const words = ["hello", "world", "lighthouse"];
-middle(words); // no need to capture return value for this test case
-assertArraysEqual(words, ["hello", "world", "lighthouse"]);
-
-// Test with one return value
-const test1 = [6, 8, 12, 17, 3];
-const expected1 = [12];
-assertArraysEqual(middle(test1), expected1);
-
-// Test with two return values
-const test2 = [6, 8, 12, 17, 3, 31];
-const expected2 = [12, 17];
-assertArraysEqual(middle(test2), expected2);
-
-// Test with zero elements
-const test3 = [];
-const expected3 = [];
-assertArraysEqual(middle(test3), expected3);
-
-// Test with one element
-const test4 = [3];
-const expected4 = [3];
-assertArraysEqual(middle(test4), expected4);
+describe("#middle", () => {
+  it("should not mutate the original array", () => {
+    const original = ["hello", "world", "lighthouse"];
+    middle(original);
+    assert.deepEqual(original,["hello", "world", "lighthouse"]);
+  });
+  it("should return the middle value of an array with odd number of elements", () => {
+    const result = middle([6, 8, 12, 17, 3]);
+    assert.deepEqual(result, [12]);
+  });
+  it("should return the 2 middle values of an array with even number of elements", () => {
+    const result = middle([6, 8, 12, 17, 3, 31]);
+    assert.deepEqual(result, [12, 17]);
+  });
+  it("should return an empty array when passed an empty array", () => {
+    const result = middle([]);
+    assert.deepEqual(result, []);
+  });
+  it("should return the original array when passed an array with just one element", () => {
+    const original = [3];
+    const result = middle(original);
+    assert.deepEqual(result, original);
+  });
+});
