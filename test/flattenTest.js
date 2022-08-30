@@ -1,5 +1,4 @@
 const assert = require('chai').assert;
-const { italic } = require('ansi-colors');
 const flatten = require('../flatten');
 
 describe('#flatten', () => {

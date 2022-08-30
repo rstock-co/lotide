@@ -1,5 +1,4 @@
 const assert = require('chai').assert;
-const { italic } = require('ansi-colors');
 const countOnly = require('../countOnly');
 
 describe('#countOnly', () => {
